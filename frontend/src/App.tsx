@@ -1,20 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+
+import FeedButton from './components/FeedButton';
+import History from './components/History';
+import CatList from './components/CatList';
 
 function App() {
     return (
-        <div className='App'>
-            <header className='App-header'>
-                <img src={logo} className='App-logo' alt='logo' />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a className='App-link' href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>
-                    Learn React
-                </a>
-            </header>
-        </div>
+        <Container>
+            <Grid container direction='column' alignItems='center' spacing={4} p={4}>
+                <Grid item>
+                    <FeedButton />
+                </Grid>
+                <Grid item xs={12}>
+                    <History />
+                </Grid>
+                <Grid item>
+                    <CatList />
+                </Grid>
+            </Grid>
+        </Container>
     );
 }
 
