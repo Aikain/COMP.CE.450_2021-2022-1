@@ -4,7 +4,7 @@ on: [push]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/frontend
+  IMAGE_NAME: aikain/comp.ce.350_2021-2022-1/frontend
 
 jobs:
   build-and-push-image:
