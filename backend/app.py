@@ -81,7 +81,9 @@ INSERT IGNORE INTO cat (id, name) VALUES (1, 'Sämplylä'),(2, 'Sipuli')
 conn.commit()
 
 
-def add_cat_visit(cat_id):
+def add_cat_visit(data):
+    cat_id = json.loads(data)["cat"]
+
     logger.debug("add cat visit: {}".format(cat_id))
     cur.execute(
         """INSERT INTO visit (cat_id) VALUES (%s)""",
