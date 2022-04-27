@@ -17,9 +17,11 @@ const FeedButton = () => {
     const feed = () => {
         setFeeding(true);
 
-        setTimeout(() => {
+        fetch('/api/v0/feed', {
+            method: 'PATCH',
+        }).finally(() => {
             setFeeding(false);
-        }, 2000);
+        });
     };
     return (
         <CustomButton variant='contained' onClick={feed} disabled={feeding}>
