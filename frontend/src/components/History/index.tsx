@@ -7,31 +7,37 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useEffect, useState } from 'react';
 
-const rows = [
-    {
-        icon: '/sampyla64.jpg',
-        name: 'Sämpylä',
-        time: 1650467646778,
-    },
-    {
-        icon: '/sipuli64.jpg',
-        name: 'Sipuli',
-        time: 1650467643778,
-    },
-    {
-        icon: '/sampyla64.jpg',
-        name: 'Sämpylä',
-        time: 1650467526778,
-    },
-    {
-        icon: '/sampyla64.jpg',
-        name: 'Sämpylä',
-        time: 1650467506778,
-    },
-];
+interface CatVisit {
+    name: string;
+    time: string;
+    icon: string;
+}
+
+const addIcons = (visits: CatVisit[]): CatVisit[] =>
+    visits.map((visit) => ({
+        ...visit,
+        icon: visit.name.toLowerCase() === 'sipuli' ? '/sipuli64.jpg' : '/sampyla64.jpg',
+    }));
 
 const History = () => {
+    const [rows, setRows] = useState<CatVisit[]>([]);
+
+    useEffect(() => {
+        const interval = setInterval(() => fetchCatVisits(), 10000);
+
+        fetchCatVisits();
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const fetchCatVisits = () => {
+        fetch('/api/v0/catvisits')
+            .then((res) => res.json())
+            .then((data) => setRows(addIcons(data)));
+    };
+
     return (
         <TableContainer component={Paper}>
             <Table
