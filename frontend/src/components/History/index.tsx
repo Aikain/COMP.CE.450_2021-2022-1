@@ -15,12 +15,14 @@ interface CatVisit {
     icon: string;
 }
 
-const addIcons = (visits: string[][]): CatVisit[] =>
-    visits.map(([name, time]) => ({
-        name,
-        time,
-        icon: name.toLowerCase() === 'sipuli' ? '/sipuli64.jpg' : '/sampyla64.jpg',
-    }));
+const convertData = (visits: string[][]): CatVisit[] =>
+    visits
+        .map(([name, time]) => ({
+            name,
+            time,
+            icon: name.toLowerCase() === 'sipuli' ? '/sipuli64.jpg' : '/sampyla64.jpg',
+        }))
+        .sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
 
 const History = () => {
     const [rows, setRows] = useState<CatVisit[]>([]);
@@ -36,7 +38,7 @@ const History = () => {
     const fetchCatVisits = () => {
         fetch('/api/v0/catvisits')
             .then((res) => res.json())
-            .then((data) => setRows(addIcons(data)));
+            .then((data) => setRows(convertData(data)));
     };
 
     return (
@@ -57,7 +59,7 @@ const History = () => {
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                            <TableCell component='th' scope='row'>
+                            <TableCell component='th' scope='row' width='70%'>
                                 <Grid container alignItems='center' spacing={2}>
                                     <Grid item>
                                         <Avatar alt={row.name} src={row.icon} />
@@ -65,7 +67,9 @@ const History = () => {
                                     <Grid item>{row.name}</Grid>
                                 </Grid>
                             </TableCell>
-                            <TableCell align='right'>{new Date(row.time).toLocaleTimeString()}</TableCell>
+                            <TableCell align='right' width='30%'>
+                                {new Date(row.time).toLocaleTimeString()}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
