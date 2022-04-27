@@ -1,6 +1,6 @@
 {
-    "short_name": "React App",
-    "name": "Create React App Sample",
+    "short_name": "Cat feeder",
+    "name": "Cat feeder for minmin's cats",
     "icons": [
         {
             "src": "favicon.ico",
