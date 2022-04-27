@@ -1,0 +1,4 @@
+flask~=2.1.1
+flask-mqtt~=1.1.1
+flask-socketio~=5.1.2
+mariadb~=1.0.11
