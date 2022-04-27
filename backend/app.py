@@ -113,7 +113,6 @@ def feed():
 
 @app.route('/api/v0/catvisits')
 def cat_visits():
-    print(json.dumps(get_cat_visits()))
     return jsonify(get_cat_visits())
 
 
