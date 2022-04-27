@@ -15,10 +15,11 @@ interface CatVisit {
     icon: string;
 }
 
-const addIcons = (visits: CatVisit[]): CatVisit[] =>
-    visits.map((visit) => ({
-        ...visit,
-        icon: visit.name.toLowerCase() === 'sipuli' ? '/sipuli64.jpg' : '/sampyla64.jpg',
+const addIcons = (visits: string[][]): CatVisit[] =>
+    visits.map(([name, time]) => ({
+        name,
+        time,
+        icon: name.toLowerCase() === 'sipuli' ? '/sipuli64.jpg' : '/sampyla64.jpg',
     }));
 
 const History = () => {
